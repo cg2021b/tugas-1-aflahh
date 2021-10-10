@@ -1,26 +1,27 @@
 let scene, camera, renderer, lights, box, cone, cylinder, torus, dodecahedron, torusknot, lathe;
 
-// set up the environment - 
-// initiallize scene, camera, objects and renderer
+// set up the environment - 
+// initiallize scene, camera, objects and renderer
 function main() {
-    // 1. create the scene
+    // 1. create the scene
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0x000000);
 
-    // 2. create an locate the camera + light    
+    // 2. create an locate the camera + light    
     camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 1000);
+    camera.position.x = 15;
     camera.position.z = 10;
 
     // light
     lights = [
         ambientLight = new THREE.AmbientLight(0xffffff, 2),
         directionalLight = new THREE.DirectionalLight(0xffffff, 2),
-        hemisphereLight = new THREE.HemisphereLight(0xffffff, 0xFFFF00, 2),
+        hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x00FF00, 2),
         pointLight = new THREE.PointLight(0xffffff, 2, 100, 2),
         spotLight = new THREE.SpotLight(0xffffff, 2, 100, 1, 1, 1)
     ];
     lights.forEach((light) => {
-        light.position.set(-10, 15, 50);
+        light.position.set(0, 15, 50);
         scene.add(light);
         light.visible = false;
     });
@@ -33,7 +34,7 @@ function main() {
         lights[document.querySelector('input[name="Light"]:checked').value].visible = true;
     });
 
-    // 3. create an locate the object on the scene  
+    // 3. create an locate the object on the scene  
     // box
     box = new THREE.Mesh(
         new THREE.BoxGeometry(1, 1, 1),
@@ -45,7 +46,7 @@ function main() {
     box.position.x = -3.5;
     box.position.y = 1.5;
 
-    //cone
+    // cone
     cone = new THREE.Mesh(
         new THREE.ConeGeometry(0.5, 1, 6),
         new THREE.MeshLambertMaterial({
@@ -58,7 +59,7 @@ function main() {
     scene.add(cone);
     cone.position.y = 1.5;
 
-    //cylinder
+    // cylinder
     cylinder = new THREE.Mesh(
         new THREE.CylinderGeometry(0.5, 0.5, 1, 20),
         new THREE.MeshStandardMaterial({
@@ -117,16 +118,19 @@ function main() {
     scene.add(lathe);
     lathe.position.y = -2;
 
-    // 4. create the renderer     
+    // 4. create the renderer     
     renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth - 200, window.innerHeight - 200);
+    renderer.setSize(window.innerWidth - 100, window.innerHeight - 200);
     document.body.appendChild(renderer.domElement);
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    renderer.render(scene, camera, controls);
 
     //call main animation loop
     mainLoop();
 }
 
-// main animation loop - calls 50-60 in a second.
+// main animation loop - calls 50-60 in a second.
 function mainLoop() {
     box.rotation.x += 0.01;
     box.rotation.y += 0.01;
