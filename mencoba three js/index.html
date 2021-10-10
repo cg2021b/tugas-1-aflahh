@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mencoba three js</title>
+    <style>
+        body {
+            background-color: whitesmoke;
+            text-align: center;
+        }
+
+        canvas {
+            margin: auto;
+            display: block;
+            margin-top: 10px;
+            border-radius: 50px;
+        }
+
+        #name {
+            margin-bottom: 50px;
+        }
+
+        #lightChange input {
+            margin-left: 15px;
+        }
+    </style>
+    <script src="js/three.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+
+<body onload="main()">
+    <h2 id="name">Aflah Hilmy &emsp;||&emsp; 05111940000177</h2>
+    <h3>Select the light</h3>
+    <div id="lightChange">
+        <input type="radio" name="Light" id="0" value="0" checked>
+        <label for="0">Ambient Light</label>
+        <input type="radio" name="Light" id="1" value="1">
+        <label for="1">Directional Light</label>
+        <input type="radio" name="Light" id="2" value="2">
+        <label for="2">Hemisphere Light</label>
+        <input type="radio" name="Light" id="3" value="3">
+        <label for="3">Point Light</label>
+        <input type="radio" name="Light" id="4" value="4">
+        <label for="4">Spot Light</label>
+    </div>
+</body>
+
+</html>
